@@ -1,0 +1,32 @@
+{
+  "name": "universal-app",
+  "description": "Example of a universal (isomorphic) app using JSPM + React + Redux",
+  "version": "0.0.1",
+  "homepage": "http://github.com/grgur/universal-app",
+  "author": "Grgur Grisogono <grguru@gmail.com> (http://github.com/grgur)",
+  "license": "MIT",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/grgur/universal-app.git"
+  },
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "react": "npm:react@^0.14.0-beta3",
+      "react-dom": "npm:react-dom@^0.14.0-beta3",
+      "redux": "github:gaearon/redux@1.0.0-rc"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
+    }
+  },
+
+  "scripts": {
+    "start": "python -m SimpleHTTPServer 3005",
+    "preinstall": "npm i -g jspm",
+    "postinstall": "jspm install"
+  }
+
+}
