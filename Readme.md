@@ -1,3 +1,7 @@
+As usual, just run `npm install`
+
+
+* My notes *
 ```
 jspm init .
 jspm install react
