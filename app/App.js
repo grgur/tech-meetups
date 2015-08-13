@@ -1,4 +1,5 @@
 import React from 'react';
+import SliderContainer from './slider/SliderContainer';
 
 let {Component} = React;
 
@@ -7,6 +8,7 @@ export default class App extends Component {
         return (
             <div>
                 <h1>Universal App Example</h1>
+                <SliderContainer />
             </div>
         );
     }
