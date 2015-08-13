@@ -26,7 +26,8 @@
   "scripts": {
     "start": "python -m SimpleHTTPServer 3005",
     "preinstall": "npm i -g jspm",
-    "postinstall": "jspm install"
+    "postinstall": "jspm install",
+    "installeslint": "npm i -g eslint eslint-plugin-react eslint-config-airbnb"
   }
 
 }
