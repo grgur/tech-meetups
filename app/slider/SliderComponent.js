@@ -13,12 +13,8 @@ export default class SliderComponent extends Component {
     label: 'Slider',
   };
 
-  onChange(ev) {
-    console.log(ev.target.value);
-  }
-
   render() {
-    const { label, value } = this.props;
+    const { label, value, onSliderChangeVolume } = this.props;
 
     return (
       <div>
@@ -29,7 +25,7 @@ export default class SliderComponent extends Component {
           max="100"
           step="1"
           defaultValue={value}
-          onChange={this.onChange}
+          onChange={onSliderChangeVolume}
         />
       </div>
     );

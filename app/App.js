@@ -1,6 +1,7 @@
 import React from 'react';
 import SliderContainer from './slider/SliderContainer';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import DisplayContainer from './display/DisplayContainer';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from './reducers/index';
 
@@ -14,7 +15,7 @@ export default class App extends Component {
       <div>
         <h1>Universal App Example</h1>
         <Provider store={store}>
-          {() => <SliderContainer /> }
+          {() => <div><SliderContainer /><DisplayContainer /></div> }
         </Provider>
       </div>
     );

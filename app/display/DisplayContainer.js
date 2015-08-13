@@ -1,5 +1,5 @@
 import React from 'react';
-import SliderComponent from './SliderComponent';
+import SliderComponent from './DisplayComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as VolumeActions from '../actions/VolumeActions';
@@ -9,11 +9,12 @@ const { Component } = React;
 @connect(state => ({
   volume: state.volumelevels
 }))
-export default class SliderContainer extends Component {
+export default class DisplayContainer extends Component {
   render() {
     const { volume, dispatch } = this.props;
+
     return (
-      <SliderComponent label="Volume" value={volume.level} {...bindActionCreators(VolumeActions, dispatch)} />
+      <SliderComponent value={volume.level} {...bindActionCreators(VolumeActions, dispatch)} />
     );
   }
 }
