@@ -6,6 +6,7 @@ export default class SliderComponent extends Component {
   static propTypes = {
     value: PropTypes.number,
     label: PropTypes.string,
+    onSliderChangeVolume: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
