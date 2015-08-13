@@ -8,6 +8,7 @@ export default function volumeLevels(state = initialState, action) {
   switch (action.type) {
   case CHANGE_VOLUME:
     return {
+      ...state,
       level: action.level,
     };
 
