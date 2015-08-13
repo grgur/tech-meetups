@@ -9,7 +9,7 @@ export default class SliderComponent extends Component {
   };
 
   static defaultProps = {
-    value: 50,
+    value: 0,
     label: 'Slider',
   };
 
@@ -35,5 +35,5 @@ export default class SliderComponent extends Component {
     );
   }
 
-  state = { value: this.props.value };
+   state = { value: this.props.value };
 }

@@ -22,7 +22,9 @@ System.config({
     "core-js": "npm:core-js@0.9.18",
     "react": "npm:react@0.14.0-beta3",
     "react-dom": "npm:react-dom@0.14.0-beta3",
-    "redux": "github:gaearon/redux@1.0.0-rc",
+    "react-redux": "npm:react-redux@0.8.2",
+    "redux": "npm:redux@1.0.0-rc",
+    "redux-thunk": "npm:redux-thunk@0.1.0",
     "github:jspm/nodelibs-buffer@0.1.0": {
       "buffer": "npm:buffer@3.4.1"
     },
@@ -98,6 +100,10 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:invariant@2.1.0": {
+      "envify": "npm:envify@3.4.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
     "npm:jstransform@10.1.0": {
       "base62": "npm:base62@0.1.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -117,6 +123,11 @@ System.config({
       "fbjs": "npm:fbjs@0.1.0-alpha.4",
       "react": "npm:react@0.14.0-beta3"
     },
+    "npm:react-redux@0.8.2": {
+      "invariant": "npm:invariant@2.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "redux": "npm:redux@1.0.0-rc"
+    },
     "npm:react@0.14.0-beta3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "envify": "npm:envify@3.4.0",
@@ -134,6 +145,10 @@ System.config({
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31",
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:redux@1.0.0-rc": {
+      "invariant": "npm:invariant@2.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:source-map@0.1.31": {
       "amdefine": "npm:amdefine@1.0.0",
