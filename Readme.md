@@ -4,7 +4,7 @@ Universal app using:
 * React JS (v0.14)
 * Redux
 * JSPM
-* Servere side/middleware TBD
+* Server side/middleware TBD
 
 Installation
 --
