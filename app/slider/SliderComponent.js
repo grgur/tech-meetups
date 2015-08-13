@@ -18,7 +18,7 @@ export default class SliderComponent extends Component {
     const { label, value, onSliderChangeVolume } = this.props;
 
     return (
-      <div>
+      <span>
         <label>{label}</label>
         <input
           type="range"
@@ -28,7 +28,7 @@ export default class SliderComponent extends Component {
           defaultValue={value}
           onChange={onSliderChangeVolume}
         />
-      </div>
+      </span>
     );
   }
 

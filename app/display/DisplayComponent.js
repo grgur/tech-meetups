@@ -15,9 +15,9 @@ export default class DisplayComponent extends Component {
     const { value } = this.props;
 
     return (
-      <div>
+      <span>
         <output>{value}</output>
-      </div>
+      </span>
     );
   }
 
