@@ -2,6 +2,7 @@ System.config({
   "baseURL": "/",
   "transpiler": "babel",
   "babelOptions": {
+    "stage": 0,
     "blacklist": [],
     "optional": [
       "runtime"
