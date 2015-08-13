@@ -1,7 +1,7 @@
 import React from 'react';
 import SliderContainer from './slider/SliderContainer';
 
-let {Component} = React;
+const {Component} = React;
 
 export default class App extends Component {
     render() {
@@ -11,5 +11,5 @@ export default class App extends Component {
                 <SliderContainer />
             </div>
         );
-    }
+      }
 }
