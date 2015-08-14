@@ -22,5 +22,3 @@ export default class App extends Component {
   }
 }
 
-// enable hot reloading in jspm-server
-export const __hotReload = true;
