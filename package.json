@@ -1,6 +1,6 @@
 {
   "name": "universal-app",
-  "description": "Example of a universal (isomorphic) app using JSPM + React + Redux",
+  "description": "Example of a universal (isomorphic) app using  React + Redux + Webpack",
   "version": "0.0.1",
   "homepage": "http://github.com/grgur/universal-app",
   "author": "Grgur Grisogono <grguru@gmail.com> (http://github.com/grgur)",
@@ -21,6 +21,7 @@
     "html-webpack-plugin": "^1.6.1",
     "node-libs-browser": "^0.5.2",
     "react-hot-loader": "^1.2.8",
+    "redux-devtools": "^1.0.2",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"
   },
@@ -29,6 +30,7 @@
     "react": "^0.14.0-beta3",
     "react-dom": "^0.14.0-beta3",
     "react-redux": "^0.8.2",
-    "redux": "^1.0.0-rc"
+    "redux": "^1.0.0-rc",
+    "redux-thunk": "^0.1.0"
   }
 }

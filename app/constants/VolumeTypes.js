@@ -1,1 +1,0 @@
-export const CHANGE_VOLUME = 'CHANGE_VOLUME';

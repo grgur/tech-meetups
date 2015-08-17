@@ -1,0 +1,2 @@
+export const CHANGE_VOLUME = 'CHANGE_VOLUME';
+export const REQUEST_LOCATION = 'REQUEST_LOCATION';

@@ -22,6 +22,7 @@ rules:
   comma-style: [2, "last"]
   default-case: 2
   func-style: [2, "declaration"]
+  func-names: [0]
   guard-for-in: 2
   no-underscore-dangle: 0
   no-floating-decimal: 2

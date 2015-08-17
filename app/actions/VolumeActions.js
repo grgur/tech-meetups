@@ -1,4 +1,4 @@
-import { CHANGE_VOLUME } from '../constants/VolumeTypes';
+import { CHANGE_VOLUME } from '../constants/Types';
 
 export function onSliderChangeVolume(ev) {
   const level = parseInt(ev.target.value, 10);

@@ -1,4 +1,4 @@
-import { CHANGE_VOLUME } from '../constants/VolumeTypes';
+import { CHANGE_VOLUME } from '../constants/Types';
 
 const initialState = {
   level: 30,
