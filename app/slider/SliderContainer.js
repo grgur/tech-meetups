@@ -20,7 +20,6 @@ export default class SliderContainer extends Component {
 
   componentWillMount() {
     const { dispatch } = this.props;
-    console.log('Mounting');
     dispatch(getGeolocation());
   }
 
