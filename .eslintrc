@@ -21,21 +21,7 @@ env:
 
 rules:
   indent: 2
-  brace-style: [2, "1tbs"]
-  comma-style: [2, "last"]
-  default-case: 2
-  func-style: [2, "declaration"]
-  func-names: [0]
-  guard-for-in: 2
-  no-underscore-dangle: 0
-  no-floating-decimal: 2
-  no-nested-ternary: 2
-  no-undefined: 2
-  radix: 2
-  space-after-keywords: [2, "always"]
-  space-before-blocks: 2
-  valid-jsdoc: [2, { prefer: { "return": "returns"}}]
-  wrap-iife: [2, 'inside']
-  quotes: [1, "single"]
-  spaced-line-comment: [0, "never", {}]
-  func-style: [0, "declaration"]
+  func-style: 0
+  func-names: 0
+  comma-dangle: 0
+  no-console: 0
