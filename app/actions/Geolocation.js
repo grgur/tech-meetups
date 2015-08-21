@@ -1,7 +1,6 @@
 import { RECEIVE_LOCATION } from '../constants/Types';
 import { defaultPosition } from '../constants/Geo';
 import { fetchMeetupGroups } from './Meetup';
-import store from '../stores';
 
 function requestGeolocation() {
   return function(dispatch) {
@@ -30,8 +29,10 @@ function getDefaultGeolocation() {
 }
 
 export function getGeolocation() {
-  if (!navigator.geolocation) {
-    return store.dispatch(getDefaultGeolocation());
-  }
-  return store.dispatch(requestGeolocation());
+  return function(dispatch) {
+    if (!navigator.geolocation) {
+      return dispatch(getDefaultGeolocation());
+    }
+    return dispatch(requestGeolocation());
+  };
 }
