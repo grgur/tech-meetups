@@ -12,7 +12,7 @@ function requestGeolocation() {
         coords: {
           latitude: latitude,
           longitude: longitude,
-          inProgress: false,
+          isDefault: false,
         },
       });
 
@@ -22,15 +22,21 @@ function requestGeolocation() {
 }
 
 function getDefaultGeolocation() {
-  return {
-    type: RECEIVE_LOCATION,
-    ...defaultPosition,
+  return function(dispatch) {
+    dispatch({
+      type: RECEIVE_LOCATION,
+      coords: {
+        ...defaultPosition
+      },
+    });
+
+    return dispatch(fetchMeetupGroups(defaultPosition));
   };
 }
 
-export function getGeolocation() {
+export function getGeolocation(getDefault) {
   return function(dispatch) {
-    if (!navigator.geolocation) {
+    if (getDefault === true || !navigator.geolocation) {
       return dispatch(getDefaultGeolocation());
     }
     return dispatch(requestGeolocation());

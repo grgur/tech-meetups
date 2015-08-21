@@ -3,7 +3,6 @@ import SliderComponent from './SliderComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as VolumeActions from '../actions/VolumeActions';
-import { getGeolocation } from '../actions/Geolocation';
 
 const { Component, PropTypes } = React;
 
