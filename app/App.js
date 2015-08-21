@@ -1,25 +1,13 @@
 import React from 'react';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import * as reducers from './reducers/index';
-import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
-import thunk from 'redux-thunk';
+import store from './stores';
 import SliderContainer from './slider/SliderContainer';
 import DisplayContainer from './display/DisplayContainer';
 import GroupListContainer from './view/meetup/GroupListContainer';
 
 const { Component } = React;
 
-const finalCreateStore = compose(
-  applyMiddleware(thunk),
-  devTools(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-  createStore
-);
-
-const reducer = combineReducers(reducers);
-const store = finalCreateStore(reducer);
 
 export default class App extends Component {
   render() {
