@@ -23,9 +23,8 @@ export default class GroupListContainer extends Component {
 
   componentWillMount() {
     const { dispatch, geo } = this.props;
-    const apiKey = 'e34b186d2611597b496f049f5c52';
 
-    dispatch(fetchMeetupGroups({apiKey, ...geo}));
+    dispatch(fetchMeetupGroups(geo));
   }
 
   render() {

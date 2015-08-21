@@ -1,5 +1,5 @@
 import fetchJsonp from 'fetch-jsonp';
-// e34b186d2611597b496f049f5c52
+import { apiKey } from '../constants/Meetup';
 
 import {
   RECEIVE_GROUPS,
@@ -13,7 +13,7 @@ function receiveMeetupGroups(json) {
 }
 
 export function fetchMeetupGroups(conf) {
-  const { latitude, longitude, apiKey } = conf;
+  const { latitude, longitude } = conf;
 
   return dispatch => {
     return fetchJsonp(`https://api.meetup.com/find/groups?&sign=true&photo-host=public&lon=${longitude}&text=js&category=34&lat=${latitude}&page=20&key=${apiKey}`, {
