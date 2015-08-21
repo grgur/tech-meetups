@@ -1,4 +1,4 @@
-import { RECEIVE_LOCATION } from '../constants/Types';
+import { RECEIVE_LOCATION, INVALIDATE_GROUPS } from '../constants/Types';
 import { defaultPosition } from '../constants/Geo';
 import { fetchMeetupGroups } from './Meetup';
 
@@ -34,8 +34,16 @@ function getDefaultGeolocation() {
   };
 }
 
+function invalidateGroups() {
+  return {
+    type: INVALIDATE_GROUPS,
+  };
+}
+
 export function getGeolocation(getDefault) {
   return function(dispatch) {
+    dispatch(invalidateGroups());
+
     if (getDefault === true || !navigator.geolocation) {
       return dispatch(getDefaultGeolocation());
     }

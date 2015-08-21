@@ -1,9 +1,27 @@
-import { RECEIVE_GROUPS } from '../constants/Types';
+import {
+  RECEIVE_GROUPS,
+  REQUEST_GROUPS,
+  INVALIDATE_GROUPS,
+} from '../constants/Types';
 
-export default function volumeLevels(state = [], action) {
+const defaultState = {
+  groups: [],
+  isLoading: true,
+};
+
+export default function volumeLevels(state = defaultState, action) {
   switch (action.type) {
   case RECEIVE_GROUPS:
-    return action.groups;
+    return {
+      groups: action.groups,
+      isLoading: false
+    };
+
+  case REQUEST_GROUPS:
+    return defaultState;
+
+  case INVALIDATE_GROUPS:
+    return defaultState;
 
   default:
     return state;

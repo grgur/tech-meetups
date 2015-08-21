@@ -7,18 +7,23 @@ import GeoButton from '../GeoButton';
 const { Component, PropTypes } = React;
 
 @connect(state => ({
-  meetups: state.meetups,
+  meetups: state.meetups.groups,
+  isLoading: state.meetups.isLoading,
   geo: state.geo,
 }))
 export default class MeetupList extends Component {
   static propTypes = {
     meetups: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     geo: PropTypes.object,
   };
 
   static defaultProps = {
-    meetups: [],
+    meetups: {
+      groups: [],
+      isLoading: true
+    },
   };
 
   componentWillMount() {
@@ -36,8 +41,20 @@ export default class MeetupList extends Component {
     );
   }
 
+  getLoadingIndicator() {
+    return (
+      <div className="loading">
+        ⚛Loading⚛
+      </div>
+    );
+  }
+
   getList() {
-    const { meetups } = this.props;
+    const { meetups, isLoading } = this.props;
+
+    if (isLoading === true) {
+      return this.getLoadingIndicator();
+    }
 
     if (!meetups.length) {
       return this.getEmptyList();
