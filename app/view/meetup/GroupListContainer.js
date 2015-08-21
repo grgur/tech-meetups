@@ -1,8 +1,8 @@
 import React from 'react';
-import GroupListComponent from './GroupListComponent';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchMeetupGroups } from '../../actions/Meetup';
+import GroupListComponent from './GroupListComponent';
+import GeoButton from '../GeoButton';
 
 const { Component, PropTypes } = React;
 
@@ -29,9 +29,10 @@ export default class GroupListContainer extends Component {
   }
 
   render() {
-    const { meetups, dispatch } = this.props;
+    const { meetups } = this.props;
     return (
       <div>
+        <GeoButton />
         {meetups.map((meetup, i) =>
           <GroupListComponent
             name={meetup.name}
@@ -40,7 +41,6 @@ export default class GroupListContainer extends Component {
             group_photo={meetup.group_photo}
             organizer={meetup.organizer}
             key={i}
-            {...bindActionCreators(fetchMeetupGroups, dispatch)}
           />
         )}
       </div>
