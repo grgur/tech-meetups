@@ -18,11 +18,6 @@ export default class SliderContainer extends Component {
     dispatch: PropTypes.func,
   };
 
-  componentWillMount() {
-    const { dispatch } = this.props;
-    dispatch(getGeolocation());
-  }
-
   render() {
     const { volume, geo, dispatch } = this.props;
     return (
