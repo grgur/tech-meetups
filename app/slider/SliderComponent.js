@@ -26,6 +26,7 @@ export default class SliderComponent extends Component {
           max="100"
           step="1"
           defaultValue={value}
+          value={value}
           onChange={onSliderChangeVolume}
         />
       </span>
