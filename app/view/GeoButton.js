@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { getGeolocation } from '../actions/Geolocation';
 
-const { Component } = React;
+const { Component, PropTypes } = React;
 
+@connect()
 export default class GeoButton extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+  };
+
   onButtonClick() {
-    getGeolocation();
+    const { dispatch } = this.props;
+    dispatch(getGeolocation());
   }
 
   render() {
