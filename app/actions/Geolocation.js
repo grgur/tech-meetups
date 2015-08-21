@@ -1,11 +1,12 @@
-import { REQUEST_LOCATION } from '../constants/Types';
+import { RECEIVE_LOCATION } from '../constants/Types';
 import { defaultPosition } from '../constants/Geo';
+import store from '../stores';
 
 function requestGeolocation() {
   return function(dispatch) {
     navigator.geolocation.getCurrentPosition(function(position) {
       dispatch({
-        type: REQUEST_LOCATION,
+        type: RECEIVE_LOCATION,
         coords: {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -18,11 +19,10 @@ function requestGeolocation() {
 
 export function getGeolocation() {
   if (!navigator.geolocation) {
-    // nothing should happen anyway since defaultPosition obj never mutated
-    return {
-      type: REQUEST_LOCATION,
+    return store.dispatch({
+      type: RECEIVE_LOCATION,
       ...defaultPosition,
-    };
+    });
   }
-  return dispatch => dispatch(requestGeolocation());
+  return store.dispatch(requestGeolocation());
 }
