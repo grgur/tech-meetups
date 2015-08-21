@@ -2,7 +2,7 @@ import React from 'react';
 
 const { Component, PropTypes } = React;
 
-export default class GroupListComponent extends Component {
+export default class MeetupListItem extends Component {
   static propTypes = {
     name: PropTypes.string,
     link: PropTypes.string,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchMeetupGroups } from '../../actions/Meetup';
-import GroupListComponent from './GroupListComponent';
+import MeetupListItem from './MeetupListItem';
 import GeoButton from '../GeoButton';
 
 const { Component, PropTypes } = React;
@@ -10,10 +10,10 @@ const { Component, PropTypes } = React;
   meetups: state.meetups,
   geo: state.geo,
 }))
-export default class GroupListContainer extends Component {
+export default class MeetupList extends Component {
   static propTypes = {
-    meetups: PropTypes.array,
-    dispatch: PropTypes.func,
+    meetups: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
     geo: PropTypes.object,
   };
 
@@ -27,13 +27,26 @@ export default class GroupListContainer extends Component {
     dispatch(fetchMeetupGroups(geo));
   }
 
-  render() {
+  getEmptyList() {
+    return (
+      <div className="emptyList">
+        No meetups in your area 🙈<br />
+        Maybe you should start one
+      </div>
+    );
+  }
+
+  getList() {
     const { meetups } = this.props;
+
+    if (!meetups.length) {
+      return this.getEmptyList();
+    }
+
     return (
       <div>
-        <GeoButton />
         {meetups.map((meetup, i) =>
-          <GroupListComponent
+          <MeetupListItem
             name={meetup.name}
             link={meetup.link}
             description={meetup.description}
@@ -42,6 +55,17 @@ export default class GroupListContainer extends Component {
             key={i}
           />
         )}
+      </div>
+    );
+  }
+
+  render() {
+    const list = this.getList();
+
+    return (
+      <div>
+        <GeoButton />
+        {list}
       </div>
     );
   }

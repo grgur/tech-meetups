@@ -4,7 +4,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import store from './stores';
 import SliderContainer from './slider/SliderContainer';
 import DisplayContainer from './display/DisplayContainer';
-import GroupListContainer from './view/meetup/GroupListContainer';
+import MeetupList from './view/meetup/MeetupList';
 
 const { Component } = React;
 
@@ -18,7 +18,7 @@ export default class App extends Component {
           {() => <div>
                   <SliderContainer />
                   <DisplayContainer />
-                  <GroupListContainer />
+                  <MeetupList />
                 </div>
           }
         </Provider>
