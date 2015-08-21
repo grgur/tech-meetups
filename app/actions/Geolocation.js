@@ -22,12 +22,16 @@ function requestGeolocation() {
   };
 }
 
+function getDefaultGeolocation() {
+  return {
+    type: RECEIVE_LOCATION,
+    ...defaultPosition,
+  };
+}
+
 export function getGeolocation() {
   if (!navigator.geolocation) {
-    return store.dispatch({
-      type: RECEIVE_LOCATION,
-      ...defaultPosition,
-    });
+    return store.dispatch(getDefaultGeolocation());
   }
   return store.dispatch(requestGeolocation());
 }
