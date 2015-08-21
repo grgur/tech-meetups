@@ -10,8 +10,8 @@ function requestGeolocation() {
       dispatch({
         type: RECEIVE_LOCATION,
         coords: {
-          latitude: latitude,
-          longitude: longitude,
+          latitude,
+          longitude,
           isDefault: false,
         },
       });
