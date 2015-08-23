@@ -1,8 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+import { Router } from 'react-router';
+import { history } from 'react-router/lib/BrowserHistory';
+import routes from './routes';
 import store from './stores';
-import MeetupList from './view/meetup/MeetupList';
 
 const { Component } = React;
 
@@ -13,7 +15,7 @@ export default class App extends Component {
       <div>
         <h1>Universal App Example - Tech Meetups</h1>
         <Provider store={store}>
-          {() => <MeetupList />
+          {() => <Router children={routes} history={history} />
           }
         </Provider>
         <DebugPanel top right bottom>
