@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchMeetupGroups } from '../../actions/Meetup';
-import { Link } from 'react-router';
 import MeetupListItem from './MeetupListItem';
 import GeoButton from '../GeoButton';
 
@@ -60,13 +59,8 @@ export default class MeetupList extends Component {
     if (!meetups.length) {
       return this.getEmptyList();
     }
-
     return (
       <div>
-        <ul>
-          <li><Link to="home">Meetups</Link></li>
-          <li><Link to="about">About</Link></li>
-        </ul>
         {meetups.map((meetup, i) =>
           <MeetupListItem
             name={meetup.name}
