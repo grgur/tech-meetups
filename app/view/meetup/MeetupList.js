@@ -20,16 +20,16 @@ export default class MeetupList extends Component {
   };
 
   static defaultProps = {
-    meetups: {
-      groups: [],
-      isLoading: true
-    },
+    meetups: [],
   };
 
   componentWillMount() {
-    const { dispatch, geo } = this.props;
+    const { dispatch, geo, isLoading } = this.props;
 
-    dispatch(fetchMeetupGroups(geo));
+    // defaults to true. It will be false if a dataset was returned previously
+    if (isLoading === true) {
+      dispatch(fetchMeetupGroups(geo));
+    }
   }
 
   getEmptyList() {
