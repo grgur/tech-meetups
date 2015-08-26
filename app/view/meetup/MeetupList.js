@@ -107,14 +107,19 @@ export default class MeetupList extends Component {
     };
   }
 
+  /**
+   * Only send request if coords are new
+   * @param  {Object} props Properties
+   * @param  {Boolean} force force request
+   */
   sendRequestIfNeeded(props, force) {
     const { dispatch, geo, params } = props;
     const { coords } = params;
     const objCoords = this.urlCoordsToObj(coords);
-    const shouldUpdate = this.areUrlCoordsUpdated(objCoords, geo);
+    const shouldUpdate = force || this.areUrlCoordsUpdated(objCoords, geo);
 
     // defaults to true. It will be false if a dataset was returned previously
-    if (shouldUpdate === true || force === true) {
+    if (shouldUpdate === true) {
       dispatch(setGeoLocation(objCoords));
     }
   }

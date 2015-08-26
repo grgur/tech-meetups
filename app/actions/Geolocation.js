@@ -1,6 +1,11 @@
-import { RECEIVE_LOCATION, INVALIDATE_GROUPS } from '../constants/Types';
 import { defaultPosition } from '../constants/Geo';
 import { fetchMeetupGroups } from './Meetup';
+
+import {
+  RECEIVE_LOCATION,
+  INVALIDATE_GROUPS,
+  IGNORE_CHANGE
+} from '../constants/Types';
 
 let cache = {
   latitude: 0,
@@ -34,7 +39,7 @@ export function setGeoLocation(geoLocation) {
 
   if (cacheLat === latitude && cacheLong === longitude) {
     // we already have the data, let's skip fetching and reuse
-    return false;
+    return {type: IGNORE_CHANGE};
   }
 
   return function(dispatch) {
