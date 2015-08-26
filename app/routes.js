@@ -8,6 +8,7 @@ import Nav from './view/Nav';
 export default (
   <Route component={Nav} path="/" >
     <Route component={MeetupList} path="/meetups" />
+    <Route component={MeetupList} path="/geo/:coords" />
     <Route component={About} path="/about" />
   </Route>
 );

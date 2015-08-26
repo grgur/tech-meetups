@@ -5,18 +5,7 @@ import { fetchMeetupGroups } from './Meetup';
 function requestGeolocation() {
   return function(dispatch) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      const { latitude, longitude } = position.coords;
-
-      dispatch({
-        type: RECEIVE_LOCATION,
-        coords: {
-          latitude,
-          longitude,
-          isDefault: false,
-        },
-      });
-
-      dispatch(fetchMeetupGroups({latitude, longitude}));
+      dispatch(setGeoLocation(position.coords));
     });
   };
 }
@@ -48,5 +37,22 @@ export function getGeolocation(getDefault) {
       return dispatch(getDefaultGeolocation());
     }
     return dispatch(requestGeolocation());
+  };
+}
+
+export function setGeoLocation(geoLocation) {
+  const { latitude, longitude } = geoLocation;
+
+  return function(dispatch) {
+    dispatch({
+      type: RECEIVE_LOCATION,
+      coords: {
+        latitude,
+        longitude,
+        isDefault: false,
+      },
+    });
+
+    dispatch(fetchMeetupGroups({latitude, longitude}));
   };
 }

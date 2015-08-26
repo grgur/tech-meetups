@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMeetupGroups } from '../../actions/Meetup';
+import { setGeoLocation } from '../../actions/Geolocation';
 import MeetupListItem from './MeetupListItem';
 import GeoButton from '../GeoButton';
 
@@ -17,6 +17,7 @@ export default class MeetupList extends Component {
     isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     geo: PropTypes.object,
+    params: PropTypes.object,
   };
 
   static defaultProps = {
@@ -24,12 +25,11 @@ export default class MeetupList extends Component {
   };
 
   componentWillMount() {
-    const { dispatch, geo, isLoading } = this.props;
+    this.sendRequestIfNeeded(this.props, true);
+  }
 
-    // defaults to true. It will be false if a dataset was returned previously
-    if (isLoading === true) {
-      dispatch(fetchMeetupGroups(geo));
-    }
+  componentWillReceiveProps(nextProps) {
+    this.sendRequestIfNeeded(nextProps);
   }
 
   getEmptyList() {
@@ -84,5 +84,38 @@ export default class MeetupList extends Component {
         {list}
       </div>
     );
+  }
+
+  areUrlCoordsUpdated(urlCoords, geoCords) {
+    if (!geoCords) {
+      return true;
+    }
+
+    if (typeof urlCoords === 'string') {
+      urlCoords = this.urlCoordsToObj(urlCoords);
+    }
+
+    return urlCoords.longitude !== geoCords.longitude || urlCoords.latitude !== geoCords.latitude;
+  }
+
+  urlCoordsToObj(strCoords) {
+    const arrUrlCoords = strCoords ? strCoords.split(',') : [];
+
+    return {
+      latitude: parseFloat(arrUrlCoords[0]),
+      longitude: parseFloat(arrUrlCoords[1]),
+    };
+  }
+
+  sendRequestIfNeeded(props, force) {
+    const { dispatch, geo, params } = props;
+    const { coords } = params;
+    const objCoords = this.urlCoordsToObj(coords);
+    const shouldUpdate = this.areUrlCoordsUpdated(objCoords, geo);
+
+    // defaults to true. It will be false if a dataset was returned previously
+    if (shouldUpdate === true || force === true) {
+      dispatch(setGeoLocation(objCoords));
+    }
   }
 }
