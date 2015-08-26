@@ -6,6 +6,11 @@ import {
   REQUEST_GROUPS,
 } from '../constants/Types';
 
+let cache = {
+  latitude: 0,
+  longitude: 0,
+};
+
 function receiveMeetupGroups(json) {
   return {
     type: RECEIVE_GROUPS,
@@ -21,6 +26,14 @@ function requestMeetupGroups() {
 
 export function fetchMeetupGroups(conf) {
   const { latitude, longitude } = conf;
+  const { latitude: cacheLat, longitude: cacheLong} = cache;
+
+  cache = conf;
+
+  if (cacheLat === latitude && cacheLong === longitude) {
+    // we already have the data, let's skip fetching and reuse
+    return false;
+  }
 
   return function(dispatch) {
     dispatch(requestMeetupGroups());
