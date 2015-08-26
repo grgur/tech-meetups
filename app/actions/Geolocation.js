@@ -2,13 +2,10 @@ import { RECEIVE_LOCATION, INVALIDATE_GROUPS } from '../constants/Types';
 import { defaultPosition } from '../constants/Geo';
 import { fetchMeetupGroups } from './Meetup';
 
-function requestGeolocation() {
-  return function(dispatch) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      dispatch(setGeoLocation(position.coords));
-    });
-  };
-}
+let cache = {
+  latitude: 0,
+  longitude: 0,
+};
 
 function getDefaultGeolocation() {
   return function(dispatch) {
@@ -29,19 +26,16 @@ function invalidateGroups() {
   };
 }
 
-export function getGeolocation(getDefault) {
-  return function(dispatch) {
-    dispatch(invalidateGroups());
-
-    if (getDefault === true || !navigator.geolocation) {
-      return dispatch(getDefaultGeolocation());
-    }
-    return dispatch(requestGeolocation());
-  };
-}
-
 export function setGeoLocation(geoLocation) {
   const { latitude, longitude } = geoLocation;
+  const { latitude: cacheLat, longitude: cacheLong} = cache;
+
+  cache = geoLocation;
+
+  if (cacheLat === latitude && cacheLong === longitude) {
+    // we already have the data, let's skip fetching and reuse
+    return false;
+  }
 
   return function(dispatch) {
     dispatch({
@@ -54,5 +48,24 @@ export function setGeoLocation(geoLocation) {
     });
 
     dispatch(fetchMeetupGroups({latitude, longitude}));
+  };
+}
+
+function requestGeolocation() {
+  return function(dispatch) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      dispatch(setGeoLocation(position.coords));
+    });
+  };
+}
+
+export function getGeolocation(getDefault) {
+  return function(dispatch) {
+    dispatch(invalidateGroups());
+
+    if (getDefault === true || !navigator.geolocation) {
+      return dispatch(getDefaultGeolocation());
+    }
+    return dispatch(requestGeolocation());
   };
 }
