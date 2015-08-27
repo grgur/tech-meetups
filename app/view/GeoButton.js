@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getGeolocation } from '../actions/Geolocation';
-
-const { Component, PropTypes } = React;
 
 @connect(state => ({
   geo: state.geo

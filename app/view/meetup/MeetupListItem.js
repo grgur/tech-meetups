@@ -1,6 +1,4 @@
-import React from 'react';
-
-const { Component, PropTypes } = React;
+import React, { Component, PropTypes } from 'react';
 
 export default class MeetupListItem extends Component {
   static propTypes = {

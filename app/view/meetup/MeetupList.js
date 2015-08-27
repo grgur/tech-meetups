@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setGeoLocation } from '../../actions/Geolocation';
 import MeetupListItem from './MeetupListItem';
 import GeoButton from '../GeoButton';
-
-const { Component, PropTypes } = React;
 
 @connect(state => ({
   meetups: state.meetups.groups,

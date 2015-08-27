@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { Router } from 'react-router';
 import routes from './routes';
 import store from './stores';
-
-const { Component, PropTypes } = React;
-
 
 export default class App extends Component {
   static propTypes = {
