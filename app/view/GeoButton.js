@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { getGeolocation } from '../actions/Geolocation';
 
 @connect(state => ({
-  geo: state.geo
+  geo: state.geo,
+  isLoading: state.meetups.isLoading,
 }))
 export default class GeoButton extends Component {
   static propTypes = {
@@ -25,16 +26,19 @@ export default class GeoButton extends Component {
   }
 
   showGeoGetter() {
+    const { isLoading } = this.props;
     return (
-      <button className="geobutton" onClick={this.onGeoGetterClick.bind(this)}>
+      <button disabled={isLoading} className="geobutton" onClick={this.onGeoGetterClick.bind(this)}>
         Meetups close to me
       </button>
     );
   }
 
   showDefaultGeo() {
+    const { isLoading } = this.props;
+
     return (
-      <button className="geobutton" onClick={this.onDefaultGeoClick.bind(this)}>
+      <button disabled={isLoading} className="geobutton" onClick={this.onDefaultGeoClick.bind(this)}>
         Default Geolocation
       </button>
     );
