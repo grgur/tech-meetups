@@ -8,8 +8,7 @@ const { Component, PropTypes } = React;
 
 @connect(state => ({
   meetups: state.meetups.groups,
-  isLoading: state.meetups.isLoading,
-  geo: state.geo,
+  isLoading: state.meetups.isLoading
 }))
 export default class MeetupList extends Component {
   static propTypes = {
@@ -25,7 +24,7 @@ export default class MeetupList extends Component {
   };
 
   componentWillMount() {
-    this.sendRequestIfNeeded(this.props, true);
+    this.sendRequestIfNeeded(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -112,15 +111,11 @@ export default class MeetupList extends Component {
    * @param  {Object} props Properties
    * @param  {Boolean} force force request
    */
-  sendRequestIfNeeded(props, force) {
-    const { dispatch, geo, params } = props;
+  sendRequestIfNeeded(props) {
+    const { dispatch, params } = props;
     const { coords } = params;
     const objCoords = this.urlCoordsToObj(coords);
-    const shouldUpdate = force || this.areUrlCoordsUpdated(objCoords, geo);
 
-    // defaults to true. It will be false if a dataset was returned previously
-    if (shouldUpdate === true) {
-      dispatch(setGeoLocation(objCoords));
-    }
+    dispatch(setGeoLocation(objCoords));
   }
 }

@@ -9,7 +9,7 @@ const defaultState = {
   isLoading: true,
 };
 
-export default function volumeLevels(state = defaultState, action) {
+export default function meetups(state = defaultState, action) {
   switch (action.type) {
   case RECEIVE_GROUPS:
     return {

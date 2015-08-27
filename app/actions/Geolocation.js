@@ -4,25 +4,31 @@ import { fetchMeetupGroups } from './Meetup';
 import {
   RECEIVE_LOCATION,
   INVALIDATE_GROUPS,
-  IGNORE_CHANGE
+  INVALIDATE_DEFAULT_LOCATION,
+  IGNORE_CHANGE,
 } from '../constants/Types';
 
-let cache = {
-  latitude: 0,
-  longitude: 0,
+const cache = {
+  coords: {
+    latitude: 0,
+    longitude: 0,
+  }
 };
 
-function getDefaultGeolocation() {
+function receiveLocation(pos) {
   return function(dispatch) {
     dispatch({
       type: RECEIVE_LOCATION,
       coords: {
-        ...defaultPosition
+        ...pos
       },
     });
-
-    return dispatch(fetchMeetupGroups(defaultPosition));
+    return dispatch(fetchMeetupGroups(pos));
   };
+}
+
+function getDefaultGeolocation() {
+  return receiveLocation(defaultPosition);
 }
 
 function invalidateGroups() {
@@ -31,33 +37,37 @@ function invalidateGroups() {
   };
 }
 
+function invalidateDefaultLocation() {
+  return {
+    type: INVALIDATE_DEFAULT_LOCATION,
+  };
+}
+
 export function setGeoLocation(geoLocation) {
   const { latitude, longitude } = geoLocation;
-  const { latitude: cacheLat, longitude: cacheLong} = cache;
+  const {latitude: defaultLat, longitude: defaultLong} = defaultPosition;
+  const {latitude: cacheLat, longitude: cacheLong} = cache.coords;
+  const isDefault = defaultLat === latitude && defaultLong === longitude;
+  const shouldUpdateLocation = cacheLat !== latitude || cacheLong !== longitude;
 
-  cache = geoLocation;
-
-  if (cacheLat === latitude && cacheLong === longitude) {
-    // we already have the data, let's skip fetching and reuse
-    return {type: IGNORE_CHANGE};
+  if (shouldUpdateLocation) {
+    cache.coords = { latitude, longitude };
+    return receiveLocation({
+      latitude,
+      longitude,
+      isDefault: isDefault
+    });
   }
 
-  return function(dispatch) {
-    dispatch({
-      type: RECEIVE_LOCATION,
-      coords: {
-        latitude,
-        longitude,
-        isDefault: false,
-      },
-    });
-
-    dispatch(fetchMeetupGroups({latitude, longitude}));
+  return {
+    type: IGNORE_CHANGE
   };
 }
 
 function requestGeolocation() {
   return function(dispatch) {
+    dispatch(invalidateGroups());
+    dispatch(invalidateDefaultLocation());
     navigator.geolocation.getCurrentPosition(function(position) {
       dispatch(setGeoLocation(position.coords));
     });
@@ -65,12 +75,9 @@ function requestGeolocation() {
 }
 
 export function getGeolocation(getDefault) {
-  return function(dispatch) {
-    dispatch(invalidateGroups());
+  if (getDefault === true || !navigator.geolocation) {
+    return getDefaultGeolocation();
+  }
 
-    if (getDefault === true || !navigator.geolocation) {
-      return dispatch(getDefaultGeolocation());
-    }
-    return dispatch(requestGeolocation());
-  };
+  return requestGeolocation();
 }
