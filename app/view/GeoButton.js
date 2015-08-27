@@ -9,6 +9,8 @@ import { getGeolocation } from '../actions/Geolocation';
 export default class GeoButton extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    geo: PropTypes.object.isRequired,
   };
 
   static contextTypes = {
@@ -25,21 +27,14 @@ export default class GeoButton extends Component {
     dispatch(getGeolocation(true));
   }
 
-  showGeoGetter() {
+  getButton(locateMe) {
     const { isLoading } = this.props;
-    return (
-      <button disabled={isLoading} className="geobutton" onClick={this.onGeoGetterClick.bind(this)}>
-        Meetups close to me
-      </button>
-    );
-  }
-
-  showDefaultGeo() {
-    const { isLoading } = this.props;
+    const text = locateMe ? 'Meetups close to me' : 'Default Geolocation';
+    const cb = locateMe ? this.onGeoGetterClick : this.onDefaultGeoClick;
 
     return (
-      <button disabled={isLoading} className="geobutton" onClick={this.onDefaultGeoClick.bind(this)}>
-        Default Geolocation
+      <button disabled={isLoading} className="geobutton" onClick={cb.bind(this)}>
+        {text}
       </button>
     );
   }
@@ -58,10 +53,6 @@ export default class GeoButton extends Component {
   render() {
     const { geo } = this.props;
 
-    if (geo.isDefault === true) {
-      return this.showGeoGetter();
-    }
-
-    return this.showDefaultGeo();
+    return this.getButton(geo.isDefault);
   }
 }
