@@ -4,7 +4,6 @@ import { apiKey } from '../constants/Meetup';
 import {
   RECEIVE_GROUPS,
   REQUEST_GROUPS,
-  IGNORE_CHANGE,
 } from '../constants/Types';
 
 const cache = {
@@ -41,7 +40,7 @@ export function fetchMeetupGroups(conf) {
 
   if (cacheLat === latitude && cacheLong === longitude) {
     // we already have the data, let's skip fetching and reuse
-    return {type: IGNORE_CHANGE};
+    return null;
   }
 
   if (cache.data[key]) {
@@ -57,4 +56,8 @@ export function fetchMeetupGroups(conf) {
       .then(json => dispatch(receiveMeetupGroups(json, key)))
       .catch(function(err) {console.warn(err); });
   };
+}
+
+export function getMeetupById(id) {
+
 }

@@ -5,7 +5,6 @@ import {
   RECEIVE_LOCATION,
   INVALIDATE_GROUPS,
   INVALIDATE_DEFAULT_LOCATION,
-  IGNORE_CHANGE,
 } from '../constants/Types';
 
 const cache = {
@@ -65,9 +64,7 @@ export function setGeoLocation(geoLocation) {
       }));
     }
 
-    return dispatch({
-      type: IGNORE_CHANGE
-    });
+    return null;
   };
 }
 
