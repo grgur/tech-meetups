@@ -15,6 +15,7 @@ export default class MeetupList extends Component {
     dispatch: PropTypes.func.isRequired,
     geo: PropTypes.object,
     params: PropTypes.object,
+    location: PropTypes.object,
   };
 
   static defaultProps = {
@@ -26,7 +27,12 @@ export default class MeetupList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.sendRequestIfNeeded(nextProps);
+    const { pathname: nextPath } = nextProps.location.pathname;
+    const { pathname: currentPath } = this.props.location.pathname;
+
+    if (nextPath !== currentPath) {
+      this.sendRequestIfNeeded(nextProps);
+    }
   }
 
   getEmptyList() {
@@ -83,18 +89,6 @@ export default class MeetupList extends Component {
     );
   }
 
-  areUrlCoordsUpdated(urlCoords, geoCords) {
-    if (!geoCords) {
-      return true;
-    }
-
-    if (typeof urlCoords === 'string') {
-      urlCoords = this.urlCoordsToObj(urlCoords);
-    }
-
-    return urlCoords.longitude !== geoCords.longitude || urlCoords.latitude !== geoCords.latitude;
-  }
-
   urlCoordsToObj(strCoords) {
     const arrUrlCoords = strCoords ? strCoords.split(',') : [];
 
@@ -107,7 +101,6 @@ export default class MeetupList extends Component {
   /**
    * Only send request if coords are new
    * @param  {Object} props Properties
-   * @param  {Boolean} force force request
    */
   sendRequestIfNeeded(props) {
     const { dispatch, params } = props;

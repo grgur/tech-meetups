@@ -20,6 +20,8 @@ const cache = {
 };
 
 function receiveLocation(pos) {
+  cache.coords = pos;
+
   return function(dispatch) {
     dispatch({
       type: RECEIVE_LOCATION,
@@ -56,7 +58,6 @@ export function setGeoLocation(geoLocation) {
 
   return function(dispatch) {
     if (shouldUpdateLocation) {
-      cache.coords = { latitude, longitude };
       return dispatch(receiveLocation({
         latitude,
         longitude,
@@ -72,7 +73,7 @@ export function setGeoLocation(geoLocation) {
 
 
 function requestGeolocation() {
-  const {latitude: myCachedLat, longitude: myCachedLong} = cache.myLocation;
+  const { latitude: myCachedLat, longitude: myCachedLong } = cache.myLocation;
 
   return function(dispatch) {
     dispatch(invalidateGroups());
