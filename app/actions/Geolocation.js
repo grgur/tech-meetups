@@ -12,6 +12,10 @@ const cache = {
   coords: {
     latitude: 0,
     longitude: 0,
+  },
+  myLocation: {
+    latitude: 0,
+    longitude: 0,
   }
 };
 
@@ -50,25 +54,37 @@ export function setGeoLocation(geoLocation) {
   const isDefault = defaultLat === latitude && defaultLong === longitude;
   const shouldUpdateLocation = cacheLat !== latitude || cacheLong !== longitude;
 
-  if (shouldUpdateLocation) {
-    cache.coords = { latitude, longitude };
-    return receiveLocation({
-      latitude,
-      longitude,
-      isDefault: isDefault
-    });
-  }
+  return function(dispatch) {
+    if (shouldUpdateLocation) {
+      cache.coords = { latitude, longitude };
+      return dispatch(receiveLocation({
+        latitude,
+        longitude,
+        isDefault: isDefault
+      }));
+    }
 
-  return {
-    type: IGNORE_CHANGE
+    return dispatch({
+      type: IGNORE_CHANGE
+    });
   };
 }
 
+
 function requestGeolocation() {
+  const {latitude: myCachedLat, longitude: myCachedLong} = cache.myLocation;
+
   return function(dispatch) {
     dispatch(invalidateGroups());
     dispatch(invalidateDefaultLocation());
+
+    if (myCachedLat + myCachedLong > 0) {
+      return dispatch(setGeoLocation(cache.myLocation));
+    }
+
     navigator.geolocation.getCurrentPosition(function(position) {
+      const { latitude, longitude } = position.coords;
+      cache.myLocation = { latitude, longitude };
       dispatch(setGeoLocation(position.coords));
     });
   };

@@ -7,15 +7,22 @@ import {
   IGNORE_CHANGE,
 } from '../constants/Types';
 
-let cache = {
-  latitude: 0,
-  longitude: 0,
+const cache = {
+  coords: {
+    latitude: 0,
+    longitude: 0,
+  },
+  data: []
 };
 
-function receiveMeetupGroups(json) {
+function receiveMeetupGroups(json, key) {
+  const { data } = json;
+
+  cache.data[key] = data;
+
   return {
     type: RECEIVE_GROUPS,
-    groups: json.data
+    groups: data
   };
 }
 
@@ -27,13 +34,18 @@ function requestMeetupGroups() {
 
 export function fetchMeetupGroups(conf) {
   const { latitude, longitude } = conf;
-  const { latitude: cacheLat, longitude: cacheLong} = cache;
+  const { latitude: cacheLat, longitude: cacheLong} = cache.coords;
+  const key = `${latitude},${latitude}`;
 
-  cache = conf;
+  cache.coords = conf;
 
   if (cacheLat === latitude && cacheLong === longitude) {
     // we already have the data, let's skip fetching and reuse
     return {type: IGNORE_CHANGE};
+  }
+
+  if (cache.data[key]) {
+    return receiveMeetupGroups({data: cache.data[key]}, key);
   }
 
   return function(dispatch) {
@@ -42,7 +54,7 @@ export function fetchMeetupGroups(conf) {
       jsonpCallback: 'callback'
     })
       .then(req => req.json())
-      .then(json => dispatch(receiveMeetupGroups(json)))
+      .then(json => dispatch(receiveMeetupGroups(json, key)))
       .catch(function(err) {console.warn(err); });
   };
 }
