@@ -5,8 +5,9 @@ import MeetupListItem from './MeetupListItem';
 import GeoButton from '../GeoButton';
 
 @connect(state => ({
-  meetups: state.meetups.groups,
-  isLoading: state.meetups.isLoading
+  meetups: state.meetup.groups.data,
+  isLoading: state.meetup.groups.isLoading,
+  test: state.meetups,
 }))
 export default class MeetupList extends Component {
   static propTypes = {

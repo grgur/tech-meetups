@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import createFragment from 'react-addons-create-fragment';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 

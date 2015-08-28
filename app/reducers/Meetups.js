@@ -1,19 +1,22 @@
+import { combineReducers } from 'redux';
+
 import {
   RECEIVE_GROUPS,
   REQUEST_GROUPS,
   INVALIDATE_GROUPS,
+  GET_MEETUP,
 } from '../constants/Types';
 
 const defaultState = {
-  groups: [],
+  data: [],
   isLoading: true,
 };
 
-export default function meetups(state = defaultState, action) {
+function groups(state = defaultState, action) {
   switch (action.type) {
   case RECEIVE_GROUPS:
     return {
-      groups: action.groups,
+      data: action.groups,
       isLoading: false
     };
 
@@ -27,3 +30,15 @@ export default function meetups(state = defaultState, action) {
     return state;
   }
 }
+
+function single(state = {}, action) {
+  switch (action.type) {
+  case GET_MEETUP:
+    return action.meetup;
+  default:
+    return state;
+  }
+}
+
+
+export default combineReducers({groups, single});

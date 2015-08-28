@@ -4,7 +4,7 @@ import { getGeolocation } from '../actions/Geolocation';
 
 @connect(state => ({
   geo: state.geo,
-  isLoading: state.meetups.isLoading,
+  isLoading: state.meetup.groups.isLoading,
 }))
 export default class GeoButton extends Component {
   static propTypes = {
