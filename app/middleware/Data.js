@@ -11,7 +11,7 @@ const defaultMeetup = {
 
 function findMeetup(id) {
   return function(element) {
-    return element.id === id;
+    return parseInt(element.id, 10) === parseInt(id, 10);
   };
 }
 
