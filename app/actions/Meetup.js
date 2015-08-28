@@ -62,9 +62,23 @@ export function fetchMeetupGroups(conf) {
   };
 }
 
-export function getMeetupById(id) {
-  return {
-    type: GET_MEETUP,
-    meetup: getMeetup(id),
+export function getMeetupById(id, data) {
+  const fromCache = data || getMeetup(id);
+
+  if (fromCache) {
+    return {
+      type: GET_MEETUP,
+      meetup: fromCache,
+    };
+  }
+
+  return function(dispatch) {
+    const url = `https://api.meetup.com/${id}?photo-host=public&page=20&sign=true&key=${apiKey}`;
+    return fetchJsonp(url, {
+      jsonpCallback: 'callback'
+    })
+      .then(req => req.json())
+      .then(json => dispatch(getMeetupById(null, json.data)))
+      .catch(function(err) {console.warn(err); });
   };
 }

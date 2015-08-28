@@ -11,7 +11,7 @@ const defaultMeetup = {
 
 function findMeetup(id) {
   return function(element) {
-    return parseInt(element.id, 10) === parseInt(id, 10);
+    return element.urlname === id;
   };
 }
 
@@ -27,7 +27,7 @@ export function setMeetups(data) {
 export function getMeetup(id) {
   // temporary fix
   meetups.find = find;
-  return meetups.find(findMeetup(id)) || defaultMeetup;
+  return meetups.find(findMeetup(id)) || false;
 }
 
 function find(predicate) {

@@ -37,11 +37,6 @@ export default class MeetupListItem extends Component {
       <article className="meetup">
         {this.getGroupPhoto()}
         <div className="meetup-name"><Link to={path}>{name}</Link></div>
-        <div className="meetup-description" dangerouslySetInnerHTML={{__html: description}}></div>
-
-        <aside className="meetup-organizer">
-          <div className="meetup-organizer-name">{organizer.name}</div>
-        </aside>
       </article>
     );
   }
