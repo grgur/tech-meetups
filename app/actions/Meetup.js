@@ -1,9 +1,11 @@
 import fetchJsonp from 'fetch-jsonp';
+import { setMeetups, getMeetup } from '../middleware/Data';
 import { apiKey } from '../constants/Meetup';
 
 import {
   RECEIVE_GROUPS,
   REQUEST_GROUPS,
+  GET_MEETUP,
 } from '../constants/Types';
 
 const cache = {
@@ -18,6 +20,8 @@ function receiveMeetupGroups(json, key) {
   const { data } = json;
 
   cache.data[key] = data;
+
+  setMeetups(data);
 
   return {
     type: RECEIVE_GROUPS,
@@ -59,5 +63,8 @@ export function fetchMeetupGroups(conf) {
 }
 
 export function getMeetupById(id) {
-
+  return {
+    type: GET_MEETUP,
+    meetup: getMeetup(id),
+  };
 }

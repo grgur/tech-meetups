@@ -72,6 +72,7 @@ export default class MeetupList extends Component {
             description={meetup.description}
             group_photo={meetup.group_photo}
             organizer={meetup.organizer}
+            id={meetup.id}
             key={i}
           />
         )}
