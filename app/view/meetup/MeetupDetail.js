@@ -4,7 +4,7 @@ import { getMeetupById } from '../../actions/Meetup';
 
 @connect(state => ({
   meetup: state.meetup.single,
-  isLoading: state.meetup.groups.isLoading
+  isLoading: state.meetup.single.isLoading,
 }))
 export default class MeetupDetail extends Component {
   static propTypes = {
@@ -14,6 +14,7 @@ export default class MeetupDetail extends Component {
     group_photo: PropTypes.object,
     organizer: PropTypes.object,
     params: PropTypes.object,
+    isLoading: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
   };
 
@@ -47,12 +48,26 @@ export default class MeetupDetail extends Component {
     return '';
   }
 
-  render() {
+  getLoadingIndicator() {
+    const { isLoading } = this.props;
+
+    return isLoading ? (
+      <div className="loading">
+        ⚛Loading⚛
+      </div>
+    ) : null;
+  }
+
+  getContent() {
     const { name, link, description, organizer } = this.state;
+
     return (
       <article className="meetup">
         {this.getGroupPhoto()}
-        <div className="meetup-name"><a href={link}>{name}</a></div>
+        <div className="meetup-name">
+          <i className="ionicons ion-link"></i>
+          <a href={link}>{name}</a>
+        </div>
         <div className="meetup-description" dangerouslySetInnerHTML={{__html: description}}></div>
 
         <aside className="meetup-organizer">
@@ -60,6 +75,12 @@ export default class MeetupDetail extends Component {
         </aside>
       </article>
     );
+  }
+
+  render() {
+    const { isLoading } = this.props;
+
+    return isLoading ? this.getLoadingIndicator() : this.getContent();
   }
 
   state = {

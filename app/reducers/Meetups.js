@@ -5,6 +5,7 @@ import {
   REQUEST_GROUPS,
   INVALIDATE_GROUPS,
   GET_MEETUP,
+  INVALIDATE_MEETUP,
 } from '../constants/Types';
 
 const defaultState = {
@@ -35,6 +36,10 @@ function single(state = {}, action) {
   switch (action.type) {
   case GET_MEETUP:
     return action.meetup;
+  case INVALIDATE_MEETUP:
+    return {
+      isLoading: true
+    };
   default:
     return state;
   }

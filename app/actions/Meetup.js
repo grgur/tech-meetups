@@ -6,6 +6,7 @@ import {
   RECEIVE_GROUPS,
   REQUEST_GROUPS,
   GET_MEETUP,
+  INVALIDATE_MEETUP,
 } from '../constants/Types';
 
 const cache = {
@@ -62,23 +63,36 @@ export function fetchMeetupGroups(conf) {
   };
 }
 
-export function getMeetupById(id, data) {
-  const fromCache = data || getMeetup(id);
+function receiveMeetup(data) {
+  return {
+    type: GET_MEETUP,
+    meetup: data,
+  };
+}
 
-  if (fromCache) {
-    return {
-      type: GET_MEETUP,
-      meetup: fromCache,
-    };
+function invalidateMeetup() {
+  return {
+    type: INVALIDATE_MEETUP,
+  };
+}
+
+export function getMeetupById(id) {
+  const cachedDeetupData = getMeetup(id);
+
+  if (cachedDeetupData) {
+    return receiveMeetup(cachedDeetupData);
   }
 
   return function(dispatch) {
     const url = `https://api.meetup.com/${id}?photo-host=public&page=20&sign=true&key=${apiKey}`;
+
+    dispatch(invalidateMeetup());
+
     return fetchJsonp(url, {
       jsonpCallback: 'callback'
     })
       .then(req => req.json())
-      .then(json => dispatch(getMeetupById(null, json.data)))
+      .then(json => dispatch(receiveMeetup(json.data)))
       .catch(function(err) {console.warn(err); });
   };
 }
