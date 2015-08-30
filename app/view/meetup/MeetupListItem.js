@@ -20,9 +20,9 @@ export default class MeetupListItem extends Component {
     const noTagsDesc = description.replace(/<\/?[^>]+(>|$)/g, '');
 
     return (
-      <article className="meetup">
+      <article className="meetup-list-item">
         <div className="meetup-name"><Link to={path}>{name}</Link></div>
-        <div className="meetup-description" dangerouslySetInnerHTML={{__html: noTagsDesc}}></div>
+        <div className="meetup-description-short" dangerouslySetInnerHTML={{__html: noTagsDesc}}></div>
       </article>
     );
   }

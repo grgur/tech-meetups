@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMeetupById } from '../../actions/Meetup';
+import './meetup.less';
 
 let lastRoute = '';
 
@@ -77,16 +78,16 @@ export default class MeetupDetail extends Component {
 
     return (
       <article className="meetup main-content">
-        {this.getGroupPhoto()}
-        <div className="meetup-name">
-          <i className="ionicons ion-link"></i>
-          <a href={link}>{name}</a>
-        </div>
-        <div className="meetup-description" dangerouslySetInnerHTML={{__html: description}}></div>
-
-        <aside className="meetup-organizer">
+        <aside>
+          <a href={link} target="_blank">
+            <div className="meetup-name">
+              {name}
+            </div>
+            {this.getGroupPhoto()}
+          </a>
           <div className="meetup-organizer-name">{organizer.name}</div>
         </aside>
+        <div className="meetup-description" dangerouslySetInnerHTML={{__html: description}}></div>
       </article>
     );
   }
