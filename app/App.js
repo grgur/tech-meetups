@@ -16,7 +16,8 @@ export default class App extends Component {
 
     return (
       <div>
-        <h1>Universal App Example - Tech Meetups</h1>
+        <h1 className="title">Tech Meetups</h1>
+        <div className="subtitle">ReactJS + Redux + React Router + Webpack + ES.later</div>
         <Provider store={store}>
           {() => (
             <Router history={history} children={routes} />

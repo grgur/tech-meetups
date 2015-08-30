@@ -17,7 +17,7 @@ export default class GeoButton extends Component {
 
     return (
       <div className="main-content about">
-        It's all about that base
+        It's all about that base <br />
         {geo}
       </div>
     );

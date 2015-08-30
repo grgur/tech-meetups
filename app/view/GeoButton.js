@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getGeolocation } from '../actions/Geolocation';
+import './geobutton.less';
 
 @connect(state => ({
   geo: state.geo,
@@ -33,9 +34,12 @@ export default class GeoButton extends Component {
     const cb = locateMe ? this.onGeoGetterClick : this.onDefaultGeoClick;
 
     return (
-      <button disabled={isLoading} className="geobutton" onClick={cb.bind(this)}>
-        {text}
-      </button>
+      <div className="geobtn-container">
+        <button disabled={isLoading} className="geobutton" onClick={cb.bind(this)}>
+          <i className="ionicons ion-location"></i>
+          {text}
+        </button>
+      </div>
     );
   }
 
