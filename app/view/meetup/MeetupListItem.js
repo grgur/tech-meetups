@@ -9,7 +9,7 @@ export default class MeetupListItem extends Component {
     description: PropTypes.string,
     group_photo: PropTypes.object,
     organizer: PropTypes.object,
-    id: PropTypes.number
+    id: PropTypes.string
   };
 
   render() {
@@ -17,12 +17,12 @@ export default class MeetupListItem extends Component {
     const path = `/meetup/${id}`;
 
     // strip html tags
-    description = description.replace(/<\/?[^>]+(>|$)/g, '')''
+    const noTagsDesc = description.replace(/<\/?[^>]+(>|$)/g, '');
 
     return (
       <article className="meetup">
         <div className="meetup-name"><Link to={path}>{name}</Link></div>
-        <div className="meetup-description" dangerouslySetInnerHTML={{__html: description}}></div>
+        <div className="meetup-description" dangerouslySetInnerHTML={{__html: noTagsDesc}}></div>
       </article>
     );
   }
