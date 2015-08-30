@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+// import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { Router } from 'react-router';
 import routes from './routes';
 import store from './stores';
@@ -21,9 +21,9 @@ export default class App extends Component {
             <Router history={history} children={routes} />
           )}
         </Provider>
-        <DebugPanel top right bottom>
-          <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
+        { /* <DebugPanel top right bottom> */}
+        { /* <DevTools store={store} monitor={LogMonitor} /> */ }
+        { /* </DebugPanel> */ } 
       </div>
     );
   }
