@@ -1,13 +1,13 @@
 {
-  "name": "universal-app",
-  "description": "Example of a universal (isomorphic) app using  React + Redux + Webpack",
+  "name": "TechMeetups",
+  "description": "Example of a web app using ReactJS + Redux + React Router + Webpack + ES.later",
   "version": "0.0.1",
-  "homepage": "http://github.com/grgur/universal-app",
+  "homepage": "http://github.com/grgur/tech-meetups",
   "author": "Grgur Grisogono <grguru@gmail.com> (http://github.com/grgur)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/grgur/universal-app.git"
+    "url": "https://github.com/grgur/tech-meetups.git"
   },
   "scripts": {
     "start": "node server",
