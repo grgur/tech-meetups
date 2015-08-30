@@ -21,6 +21,8 @@ export default class GeoButton extends Component {
         <ul>
           <li><Link to={geoString}>Meetups</Link></li>
           <li><Link to="/about">About</Link></li>
+          <li><Link to="/meetup/NoVaJS">NoVaJS</Link></li>
+          <li><Link to="/meetup/NYC-JS">NYC.JS</Link></li>
         </ul>
         {children}
       </div>

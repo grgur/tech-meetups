@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getMeetupById } from '../../actions/Meetup';
 
+let lastRoute = '';
+
 @connect(state => ({
   meetup: state.meetup.single,
   isLoading: state.meetup.single.isLoading,
@@ -16,6 +18,7 @@ export default class MeetupDetail extends Component {
     params: PropTypes.object,
     isLoading: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object,
   };
 
   static defaultProps = {
@@ -26,12 +29,23 @@ export default class MeetupDetail extends Component {
   componentWillMount() {
     const { dispatch, params } = this.props;
     const { id } = params;
+    const { pathname } = this.props.location;
+    lastRoute = pathname;
 
     dispatch(getMeetupById(id));
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState(nextProps.meetup);
+    const { dispatch, params } = nextProps;
+    const { id } = params;
+    const { pathname } = nextProps.location;
+
+    if (lastRoute !== pathname) {
+      lastRoute = pathname;
+      dispatch(getMeetupById(id));
+    } else {
+      this.setState(nextProps.meetup);
+    }
   }
 
   getGroupPhoto() {
