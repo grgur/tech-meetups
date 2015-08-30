@@ -84,7 +84,7 @@ export default class MeetupList extends Component {
     const list = this.getList();
 
     return (
-      <div className='main-content'>
+      <div className="main-content">
         <GeoButton />
         {list}
       </div>
