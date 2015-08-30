@@ -6,6 +6,7 @@ Sample web app that demonstrates usage of:
 * React Router (v.1.0 beta 3)
 * Webpack
 * ES.later (coolness)
+* Hot reloading 🖖
 
 Installation
 --
