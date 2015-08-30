@@ -48,7 +48,7 @@ export default class MeetupList extends Component {
   getLoadingIndicator() {
     return (
       <div className="loading">
-        ⚛Loading⚛
+        <i className="ionicons ion-load-c"></i>
       </div>
     );
   }
@@ -84,7 +84,7 @@ export default class MeetupList extends Component {
     const list = this.getList();
 
     return (
-      <div>
+      <div className='main-content'>
         <GeoButton />
         {list}
       </div>

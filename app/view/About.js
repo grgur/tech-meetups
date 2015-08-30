@@ -16,7 +16,7 @@ export default class GeoButton extends Component {
     const { geo } = this.props;
 
     return (
-      <div className="about">
+      <div className="main-content about">
         It's all about that base
         {geo}
       </div>

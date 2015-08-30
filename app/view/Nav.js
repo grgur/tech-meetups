@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import './nav.less';
 
 @connect(state => ({
   geo: state.geo
@@ -17,7 +18,7 @@ export default class GeoButton extends Component {
     const geoString = `/geo/${latitude},${longitude}`;
 
     return (
-      <div>
+      <div id="navigation">
         <ul>
           <li><Link to={geoString}>Meetups</Link></li>
           <li><Link to="/about">About</Link></li>

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import routes from './routes';
 import store from './stores';
+import './app.less';
 
 export default class App extends Component {
   static propTypes = {
@@ -23,7 +24,7 @@ export default class App extends Component {
         </Provider>
         { /* <DebugPanel top right bottom> */}
         { /* <DevTools store={store} monitor={LogMonitor} /> */ }
-        { /* </DebugPanel> */ } 
+        { /* </DebugPanel> */ }
       </div>
     );
   }

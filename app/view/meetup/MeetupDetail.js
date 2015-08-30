@@ -66,8 +66,8 @@ export default class MeetupDetail extends Component {
     const { isLoading } = this.props;
 
     return isLoading ? (
-      <div className="loading">
-        ⚛Loading⚛
+      <div className="main-content loading">
+        <i className="ionicons ion-load-c"></i>
       </div>
     ) : null;
   }
@@ -76,7 +76,7 @@ export default class MeetupDetail extends Component {
     const { name, link, description, organizer } = this.state;
 
     return (
-      <article className="meetup">
+      <article className="meetup main-content">
         {this.getGroupPhoto()}
         <div className="meetup-name">
           <i className="ionicons ion-link"></i>
