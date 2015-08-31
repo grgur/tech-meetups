@@ -1,9 +1,22 @@
+.meetup-list-item {
+  padding: 16px;
+  &:first-child {
+    margin-top: 16px;
+  }
+  &:nth-child(odd) {
+    background-color: #E0E5EC;
+  }
+
+  .meetup-name {
+    font-size: 18px;
+  }
+}
+
 .meetup-description-short {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  margin-bottom: 1em;
 }
 
 .meetup {
@@ -11,6 +24,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: stretch;
+
   aside {
     text-align: center;
     width: 180px;
@@ -28,3 +42,5 @@
     font-weight: bold;
   }
 }
+
+
