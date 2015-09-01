@@ -31,7 +31,7 @@ export default class GeoButton extends Component {
 
   getButton(locateMe) {
     const { isLoading } = this.props;
-    const text = locateMe ? 'Meetups close to me' : 'Default Geolocation';
+    const text = locateMe ? 'Meetups near me' : 'Default Geolocation';
     const cb = locateMe ? this.onGeoGetterClick : this.onDefaultGeoClick;
 
     return (

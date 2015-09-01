@@ -10,8 +10,10 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1 className="title">Tech Meetups</h1>
-        <div className="subtitle">ReactJS + Redux + React Router + Webpack + ES.later</div>
+        <div className="mainToolbar">
+          <h1 className="title">Tech Meetups</h1>
+          <div className="subtitle">ReactJS + Redux + React Router + Webpack + ES.later</div>
+        </div>
         <Provider store={store}>
           {() => (
             <Router children={routes} />
