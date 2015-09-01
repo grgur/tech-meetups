@@ -51,7 +51,7 @@ export default class GeoButton extends Component {
     const newPath = `/geo/${latitude},${longitude}`;
 
     if (location.pathname !== newPath) {
-      history.transitionTo(newPath);
+      history.pushState(null, newPath);
     }
   }
 
