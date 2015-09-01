@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import MeetupList from './view/meetup/MeetupList';
-import MeetupDetail from './view/meetup/MeetupDetail';
-import About from './view/About';
-import Nav from './view/Nav';
+import MeetupList from './views/meetup/MeetupList';
+import MeetupDetail from './views/meetup/MeetupDetail';
+import About from './views/About';
+import Nav from './views/Nav';
 
 export default (
   <Route component={Nav} path="/">
