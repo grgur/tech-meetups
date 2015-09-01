@@ -6,7 +6,7 @@ import './nav.less';
 @connect(state => ({
   geo: state.geo
 }))
-export default class GeoButton extends Component {
+export default class Navigation extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     geo: PropTypes.object.isRequired,

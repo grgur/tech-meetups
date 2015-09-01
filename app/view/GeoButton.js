@@ -15,7 +15,8 @@ export default class GeoButton extends Component {
   };
 
   static contextTypes = {
-    router: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   onGeoGetterClick() {
@@ -45,12 +46,12 @@ export default class GeoButton extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { geo } = nextProps;
-    const { router } = this.context;
+    const { history, location  } = this.context;
     const { latitude, longitude } = geo;
     const newPath = `/geo/${latitude},${longitude}`;
 
-    if (router.state.location.pathname !== newPath) {
-      this.context.router.transitionTo(newPath);
+    if (location.pathname !== newPath) {
+      history.transitionTo(newPath);
     }
   }
 
