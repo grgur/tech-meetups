@@ -3,7 +3,13 @@ import {
   RECEIVE_LOCATION,
   INVALIDATE_DEFAULT_LOCATION,
   GEO_PENDING,
+  GEO_ERROR,
 } from '../constants/Types';
+
+const defaultLocationParams = {
+  geoPending: false,
+  geoError: false,
+};
 
 export default function Geolocation(state = defaultPosition, action) {
   switch (action.type) {
@@ -11,7 +17,7 @@ export default function Geolocation(state = defaultPosition, action) {
     return {
       ...state,
       ...action.coords,
-      geoPending: false,
+      ...defaultLocationParams,
     };
 
   case INVALIDATE_DEFAULT_LOCATION:
@@ -24,6 +30,12 @@ export default function Geolocation(state = defaultPosition, action) {
     return {
       ...state,
       geoPending: true,
+    };
+
+  case GEO_ERROR:
+    return {
+      ...state,
+      geoError: true,
     };
 
   default:

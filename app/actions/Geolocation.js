@@ -6,6 +6,7 @@ import {
   INVALIDATE_GROUPS,
   INVALIDATE_DEFAULT_LOCATION,
   GEO_PENDING,
+  GEO_ERROR,
 } from '../constants/Types';
 
 const cache = {
@@ -18,6 +19,8 @@ const cache = {
     longitude: 0,
   }
 };
+
+let geoTimeout;
 
 function receiveLocation(pos) {
   cache.coords = pos;
@@ -55,6 +58,12 @@ function indicateGeoRequestPending() {
   };
 }
 
+function onGeoError() {
+  return {
+    type: GEO_ERROR,
+  };
+}
+
 export function setGeoLocation(geoLocation) {
   let { latitude, longitude } = geoLocation;
   const {latitude: defaultLat, longitude: defaultLong} = defaultPosition;
@@ -81,7 +90,6 @@ export function setGeoLocation(geoLocation) {
   };
 }
 
-
 function requestGeolocation() {
   const { latitude: myCachedLat, longitude: myCachedLong } = cache.myLocation;
 
@@ -94,9 +102,12 @@ function requestGeolocation() {
       return dispatch(setGeoLocation(cache.myLocation));
     }
 
+    geoTimeout = setTimeout(() => dispatch(onGeoError()), 5000);
+
     navigator.geolocation.getCurrentPosition(function(position) {
       const { latitude, longitude } = position.coords;
       cache.myLocation = { latitude, longitude };
+      clearTimeout(geoTimeout);
       dispatch(setGeoLocation(position.coords));
     });
   };

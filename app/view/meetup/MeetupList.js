@@ -11,6 +11,7 @@ const { array, bool, func, object } = PropTypes;
   isLoading: state.meetup.groups.isLoading,
   test: state.meetups,
   geoPending: state.geo.geoPending,
+  geoError: state.geo.geoError,
 }))
 export default class MeetupList extends Component {
   static propTypes = {
@@ -21,11 +22,13 @@ export default class MeetupList extends Component {
     params: object,
     location: object,
     geoPending: bool,
+    geoError: bool,
   };
 
   static defaultProps = {
     meetups: [],
     geoPending: false,
+    geoError: false,
   };
 
   componentWillMount() {
@@ -66,8 +69,21 @@ export default class MeetupList extends Component {
     );
   }
 
+  getGeoErrorMessage() {
+    return (
+      <div className="error">
+        <i className="ionicons ion-android-sad"></i><br />
+        Looks like we can't obtain geo coordinates using the GeoLocation API
+      </div>
+    );
+  }
+
   getList() {
-    const { meetups, isLoading, geoPending } = this.props;
+    const { meetups, isLoading, geoPending, geoError } = this.props;
+
+    if (geoError === true) {
+      return this.getGeoErrorMessage();
+    }
 
     if (geoPending === true) {
       return this.getGeoPendingIndicator();
