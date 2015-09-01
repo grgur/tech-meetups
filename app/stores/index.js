@@ -6,9 +6,8 @@ import thunk from 'redux-thunk';
 const finalCreateStore = compose(
   applyMiddleware(thunk),
   devTools(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-  createStore
-);
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+)(createStore);
 
 const reducer = combineReducers(reducers);
 
