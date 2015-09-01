@@ -56,9 +56,15 @@ function indicateGeoRequestPending() {
 }
 
 export function setGeoLocation(geoLocation) {
-  const { latitude, longitude } = geoLocation;
+  let { latitude, longitude } = geoLocation;
   const {latitude: defaultLat, longitude: defaultLong} = defaultPosition;
   const {latitude: cacheLat, longitude: cacheLong} = cache.coords;
+
+  if (isNaN(latitude)) {
+    latitude = defaultLat;
+    longitude = defaultLong;
+  }
+
   const isDefault = defaultLat === latitude && defaultLong === longitude;
   const shouldUpdateLocation = cacheLat !== latitude || cacheLong !== longitude;
 
