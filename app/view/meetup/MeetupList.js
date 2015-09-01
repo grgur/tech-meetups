@@ -4,23 +4,28 @@ import { setGeoLocation } from '../../actions/Geolocation';
 import MeetupListItem from './MeetupListItem';
 import GeoButton from '../GeoButton';
 
+const { array, bool, func, object } = PropTypes;
+
 @connect(state => ({
   meetups: state.meetup.groups.data,
   isLoading: state.meetup.groups.isLoading,
   test: state.meetups,
+  geoPending: state.geo.geoPending,
 }))
 export default class MeetupList extends Component {
   static propTypes = {
-    meetups: PropTypes.array.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    geo: PropTypes.object,
-    params: PropTypes.object,
-    location: PropTypes.object,
+    meetups: array.isRequired,
+    isLoading: bool.isRequired,
+    dispatch: func.isRequired,
+    geo: object,
+    params: object,
+    location: object,
+    geoPending: bool,
   };
 
   static defaultProps = {
     meetups: [],
+    geoPending: false,
   };
 
   componentWillMount() {
@@ -53,8 +58,20 @@ export default class MeetupList extends Component {
     );
   }
 
+  getGeoPendingIndicator() {
+    return (
+      <div className="loading">
+        <i className="ionicons ion-android-compass"></i>
+      </div>
+    );
+  }
+
   getList() {
-    const { meetups, isLoading } = this.props;
+    const { meetups, isLoading, geoPending } = this.props;
+
+    if (geoPending === true) {
+      return this.getGeoPendingIndicator();
+    }
 
     if (isLoading === true) {
       return this.getLoadingIndicator();

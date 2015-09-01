@@ -5,6 +5,7 @@ import {
   RECEIVE_LOCATION,
   INVALIDATE_GROUPS,
   INVALIDATE_DEFAULT_LOCATION,
+  GEO_PENDING,
 } from '../constants/Types';
 
 const cache = {
@@ -48,6 +49,12 @@ function invalidateDefaultLocation() {
   };
 }
 
+function indicateGeoRequestPending() {
+  return {
+    type: GEO_PENDING,
+  };
+}
+
 export function setGeoLocation(geoLocation) {
   const { latitude, longitude } = geoLocation;
   const {latitude: defaultLat, longitude: defaultLong} = defaultPosition;
@@ -75,6 +82,7 @@ function requestGeolocation() {
   return function(dispatch) {
     dispatch(invalidateGroups());
     dispatch(invalidateDefaultLocation());
+    dispatch(indicateGeoRequestPending());
 
     if (myCachedLat + myCachedLong > 0) {
       return dispatch(setGeoLocation(cache.myLocation));
