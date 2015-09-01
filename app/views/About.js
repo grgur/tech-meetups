@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const { Component, PropTypes } = React;
+const { func, object } = PropTypes;
 
 @connect(state => ({
   geo: state.geo
 }))
 export default class GeoButton extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    geo: PropTypes.object,
+    dispatch: func.isRequired,
+    geo: object,
   };
 
   render() {

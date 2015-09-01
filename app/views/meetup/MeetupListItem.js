@@ -2,14 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import './meetup.less';
 
+const { string, object } = PropTypes;
+
 export default class MeetupListItem extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    link: PropTypes.string,
-    description: PropTypes.string,
-    group_photo: PropTypes.object,
-    organizer: PropTypes.object,
-    id: PropTypes.string
+    name: string,
+    link: string,
+    description: string,
+    group_photo: object,
+    organizer: object,
+    id: string,
   };
 
   render() {

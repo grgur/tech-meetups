@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getMeetupById } from '../../actions/Meetup';
 import './meetup.less';
 
+const { string, bool, func, object } = PropTypes;
+
 let lastRoute = '';
 
 @connect(state => ({
@@ -11,15 +13,15 @@ let lastRoute = '';
 }))
 export default class MeetupDetail extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    link: PropTypes.string,
-    description: PropTypes.string,
-    group_photo: PropTypes.object,
-    organizer: PropTypes.object,
-    params: PropTypes.object,
-    isLoading: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object,
+    name: string,
+    link: string,
+    description: string,
+    group_photo: object,
+    organizer: object,
+    params: object,
+    isLoading: bool,
+    dispatch: func.isRequired,
+    location: object,
   };
 
   static defaultProps = {

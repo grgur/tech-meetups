@@ -3,20 +3,22 @@ import { connect } from 'react-redux';
 import { getGeolocation } from '../actions/Geolocation';
 import './geobutton.less';
 
+const { bool, func, object } = PropTypes;
+
 @connect(state => ({
   geo: state.geo,
   isLoading: state.meetup.groups.isLoading,
 }))
 export default class GeoButton extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    geo: PropTypes.object.isRequired,
+    dispatch: func.isRequired,
+    isLoading: bool.isRequired,
+    geo: object.isRequired,
   };
 
   static contextTypes = {
-    history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
+    history: object.isRequired,
+    location: object.isRequired,
   };
 
   onGeoGetterClick() {

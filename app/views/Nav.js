@@ -3,13 +3,15 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import './nav.less';
 
+const { object } = PropTypes;
+
 @connect(state => ({
   geo: state.geo
 }))
 export default class Navigation extends Component {
   static propTypes = {
-    children: PropTypes.object.isRequired,
-    geo: PropTypes.object.isRequired,
+    children: object.isRequired,
+    geo: object.isRequired,
   };
 
   render() {
