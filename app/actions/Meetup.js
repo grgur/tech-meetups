@@ -1,5 +1,5 @@
 import fetchJsonp from 'fetch-jsonp';
-import { setMeetups, getMeetup } from '../middleware/Data';
+import { setMeetups, getMeetup, cacheMeetup } from '../middleware/Data';
 import { apiKey } from '../constants/Meetup';
 
 import {
@@ -64,6 +64,8 @@ export function fetchMeetupGroups(conf) {
 }
 
 function receiveMeetup(data) {
+  cacheMeetup(data);
+
   return {
     type: GET_MEETUP,
     meetup: data,

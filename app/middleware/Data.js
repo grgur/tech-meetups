@@ -1,4 +1,5 @@
 let meetups = [];
+const cache = [];
 
 function findMeetup(id) {
   return function(element) {
@@ -16,5 +17,12 @@ export function setMeetups(data) {
 }
 
 export function getMeetup(id) {
-  return meetups.find(findMeetup(id)) || false;
+  return meetups.find(findMeetup(id)) || cache.find(findMeetup(id)) || false;
+}
+
+export function cacheMeetup(data) {
+  if (!cache.find(findMeetup(data.urlname))) {
+    cache.push(data);
+  }
+  return data;
 }
