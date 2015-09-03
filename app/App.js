@@ -13,9 +13,7 @@ export default class App extends Component {
         <h1 className="title">Tech Meetups</h1>
         <div className="subtitle">ReactJS + Redux + React Router + Webpack + ES.later</div>
         <Provider store={store}>
-          {() => (
-            <Router children={routes} />
-          )}
+          <Router children={routes} />
         </Provider>
         { /* <DebugPanel top right bottom> */}
         { /* <DevTools store={store} monitor={LogMonitor} /> */ }
