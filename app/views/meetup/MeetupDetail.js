@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { getMeetupById } from '../../actions/Meetup';
 import './meetup.less';
 
-const { string, bool, func, object } = PropTypes;
+const { bool, func, object } = PropTypes;
 
 let lastRoute = '';
+let wasLoading = false;
 
 @connect(state => ({
   meetup: state.meetup.single,
@@ -13,11 +14,6 @@ let lastRoute = '';
 }))
 export default class MeetupDetail extends Component {
   static propTypes = {
-    name: string,
-    link: string,
-    description: string,
-    group_photo: object,
-    organizer: object,
     params: object,
     isLoading: bool,
     dispatch: func.isRequired,
@@ -39,14 +35,15 @@ export default class MeetupDetail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, params } = nextProps;
+    const { dispatch, params, isLoading } = nextProps;
     const { id } = params;
     const { pathname } = nextProps.location;
 
     if (lastRoute !== pathname) {
       lastRoute = pathname;
+      wasLoading = isLoading;
       dispatch(getMeetupById(id));
-    } else {
+    } else if (!wasLoading) {
       this.setState(nextProps.meetup);
     }
   }
