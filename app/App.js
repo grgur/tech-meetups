@@ -5,6 +5,7 @@ import { Router } from 'react-router';
 import routes from './routes';
 import store from './stores';
 import './app.less';
+import * as core from 'core-js';
 
 export default class App extends Component {
   render() {
