@@ -100,12 +100,7 @@ export default class MeetupList extends Component {
       <div>
         {meetups.map((meetup, i) =>
           <MeetupListItem
-            name={meetup.name}
-            link={meetup.link}
-            description={meetup.description}
-            group_photo={meetup.group_photo}
-            organizer={meetup.organizer}
-            id={meetup.urlname}
+            {...meetup}
             key={i}
           />
         )}
